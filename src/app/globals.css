@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-pk: var(--pk);
+  --color-fk: var(--fk);
+  --color-danger: var(--danger);
+}
+
+/* Sprint 3 에서 .dark 클래스만 토글하면 되도록 색은 전부 변수로 뺀다. */
+:root {
+  --canvas: #f1f3f7;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --line: #e4e7ec;
+  --line-strong: #cbd2dc;
+  --ink: #1c2434;
+  --ink-muted: #5b6577;
+  --ink-faint: #98a1b0;
+  --accent: #4f6bed;
+  --accent-soft: #eaeeff;
+  --pk: #d99a12;
+  --fk: #7c5cd6;
+  --danger: #dc2f3c;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- React Flow 위에 얹는 ERD 전용 스타일 ---------- */
+
+.react-flow__node {
+  /* 노드 내부 입력 요소가 노드 폰트를 물려받도록 */
+  font-size: 12px;
+}
+
+/* 컬럼 핸들: 평소에도 흐리게 보여야 "여기서 끌면 되는구나"를 알 수 있다.
+   노드에 마우스를 올리거나 선택하면 또렷해진다. */
+.erd-handle.react-flow__handle {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  border: 2px solid var(--surface);
+  background: var(--line-strong);
+  opacity: 0.5;
+  transition: opacity 120ms ease, background-color 120ms ease, transform 120ms ease;
+}
+
+.react-flow__node:hover .erd-handle.react-flow__handle,
+.react-flow__node.selected .erd-handle.react-flow__handle {
+  opacity: 1;
+}
+
+.erd-handle.react-flow__handle:hover,
+.erd-handle.react-flow__handle.connectingfrom,
+.erd-handle.react-flow__handle.connectingto {
+  background: var(--accent);
+  transform: scale(1.35);
+  opacity: 1;
+}
+
+/* 연결 중에는 모든 핸들을 보여줘야 드롭 지점을 찾을 수 있다 */
+.react-flow.erd-connecting .erd-handle.react-flow__handle {
+  opacity: 1;
+}
+
+.react-flow__handle::after {
+  /* 실제 클릭 판정 영역을 시각적 크기보다 넉넉하게 */
+  content: "";
+  position: absolute;
+  inset: -7px;
+}
+
+.react-flow__edge-path {
+  stroke-width: 1.75;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 2.5;
+}
+
+.react-flow__attribution {
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 10px;
+}
+
+/* 스크롤바 */
+.erd-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.erd-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.erd-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 9999px;
+}
+
+.erd-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
