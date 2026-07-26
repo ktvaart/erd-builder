@@ -18,6 +18,15 @@ npm run typecheck  # tsc --noEmit
 브라우저 자동화 도구가 없습니다. 드래그·마우스 상호작용은 코드만 보고 "동작한다"고 단정하지 말고,
 확인하지 못했다는 점을 사용자에게 명시하세요. (과거에 이 단정 때문에 실제 버그를 놓쳤습니다.)
 
+### git push
+
+이 셸은 비대화형이라 git 이 자격증명 프롬프트를 띄우지 못하고 즉시 실패합니다. GCM 이 설치돼
+있어도 마찬가지입니다. push 할 때는 환경변수를 붙이세요.
+
+```powershell
+$env:GIT_TERMINAL_PROMPT = "1"; $env:GCM_INTERACTIVE = "true"; git push
+```
+
 ## 기획서
 
 [ERD_Builder_기획서.md](ERD_Builder_기획서.md) 가 원본 스펙이며 Sprint 1~4 계획이 들어 있습니다.
